@@ -1,0 +1,732 @@
+<html>
+	<head>
+		<title>
+			SMPPSim User Guide
+		</title>
+		<meta name="Author" content="www.seleniumsoftware.com" />
+		<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+	</head>
+	<body>
+		<table cellpadding="0" cellspacing="0" border="0" id="logo">
+			<tr>
+				<td>
+					&nbsp;
+				</td>
+				<td>
+					<img src="images/logo.gif" width="300" height="74" alt="Selenium Software logo" />
+				</td>
+				<td>
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td class="dark">
+					&nbsp;
+				</td>
+				<td class="menu">
+					<table cellpadding="0" cellspacing="0" border="0" id="menutable">
+						<tr>
+							<td class="menuitems">
+								<img src="images/dots.gif" width="5" height="5" alt="" />
+							</td>
+							<td class="menuspacers">
+								<a href="http://www.seleniumsoftware.com">
+									www.seleniumsoftware.com
+								</a>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td class="dark">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td class="outerbackground">
+					&nbsp;
+				</td>
+				<td class="orangecontentouter">
+					<!-- content -->
+
+					<h1>
+						SMPPSim User Guide
+					</h1>
+
+					<h1>
+						TABLE OF CONTENTS
+					</h1>
+					<p>
+						<a href="#releasenotes">
+							Release Notes
+						</a>
+						<br>
+						<a href="#intro">
+							Introduction
+						</a>
+						<br>
+						<a href="#quick">
+							Quick Start
+						</a>
+						<br>
+						<a href="#installation">
+							Installation
+						</a>
+						<br>
+						<a href="#config">
+							Configuration
+						</a>
+						<br>
+						<a href="#ui">
+							User Interface
+						</a>
+						<br>
+						<a href="#mo">
+							Mobile Originated Messages
+						</a>
+						<br>
+						<a href="#dr">
+							Delivery Receipts
+						</a>
+						<br>
+						<a href="#outbind">
+							OUTBIND
+						</a>
+						<br>
+						<a href="#capture">
+							PDU Capture
+						</a>
+						<br>
+						<a href="#testsuite">
+							Test Suite
+						</a>
+						<br>
+						<a href="#conditions">
+							Conditions of Use
+						</a>
+						<br>
+					</p>
+					<hr>
+					<p>
+						<b>
+							<a name="releasenotes"></a>
+							SMPPSim Version 2.6.0 Release Notes
+						</b>
+					</p>
+					<p>
+					    <ul>
+							<li>Added http stats operation. E.g. http://localhost:88/?stats. Useful in automated test suites
+							<li>Randomised message ID start value and added configurable prefix
+							<li>Added better simulation of handling ESME_RMSGQFUL when returned in a DELIVER_SM_RESP by the ESME (client). Now,
+							SMPPSim will attempt to deliver the MO message again, after a delay. See confi properties DELAYED_INBOUND_QUEUE_PROCESSING_PERIOD
+							and DELAYED_INBOUND_QUEUE_MAX_ATTEMPTS.
+						</ul>
+					</p>
+
+
+					<p>
+						<b>
+							<a name="releasenotes"></a>
+							SMPPSim Release 2.5 Release Notes
+						</b>
+					</p>
+					<p>
+					    <ul>
+							<li>Basic support for intermediate notifications added. Set registered_delivery such that 
+							registered_delivery & 0x10 == 0x10 to request an intermediate notification. Set to 0x11 for both 
+							intermediate notification and final delivery receipts for example.
+						</ul>
+					</p>	
+					
+					<p>
+						Release 2.4.1 corrected some minor documentation issues only.
+					</p>
+					<p>
+						Release 2.4.0 introduced the following new features:
+					</p>
+					<p>
+                         OUTBIND is now supported. See details below.
+					</p>
+					<hr>
+					<p>
+						<b>
+							<a name="intro"></a>
+							INTRODUCTION
+						</b>
+					</p>
+					<p>
+						SMPPSim is a testing utility which mimics the behaviour of an SMPP based SMSC. SMPP stands for Short Message Peer to Peer Protocol. SMSCs (Short Message Service Centres) from Logica Aldiscon support this protocol, as a means of allowing external (to
+						the GSM network) applications to submit and receive SMS messages to / from the SMSC. Some other SMSC vendors also support SMPP.
+					</p>
+					<p>
+						If you are intending to implement support for SMS text messaging using the SMPP protocol in your application, you will need some way of testing your application. Ultimately of course, you should aim to use a real SMSC for testing before going live.
+						Hopefully the network operator you are working with can supply a test SMSC for this purpose. In some cases however, two factors make SMPPSim a useful tool for the initial stages of testing:
+					</p>
+					<ol>
+						<li>
+							It can take months to acquire a connection to a GSM network
+						</li>
+						<li>
+							Some network operators run stringent acceptance tests before they will allow your application to interact with the production SMSCs. It can take weeks to complete these tests, even if things go well.
+						</li>
+					</ol>
+					<p>
+						So, it pays to have some independent means of doing your initial testing. Firstly so that your project is not completely dependent on acquiring a network connection in order to be able to progress, and secondly so that your code is as good as you can
+						get it before entering the formal acceptance testing phase with the network operator.
+					</p>
+					<hr>
+					<p>
+						<b>
+							<a name="quick"></a>
+							QUICK START
+						</b>
+					</p>
+					<blockquote>
+						<p>
+							For those in a hurry, here's what you need to do to get started using SMPPSim right away:
+							<br>
+							1. Write your SMPP (client) application!
+							<br>
+							2. Set up your java run-time environment. SMPPSim works with a
+							<b>
+								1.6.x Java
+							</b>
+							environment.
+							<br>
+							3. Expand the SMPPSim archive which you downloaded. If you downloaded the zip file for Windows, just use winzip in the normal way. If you downloaded the tar.gz file for unix, decompress it then extract the files in the archive by running:
+							<br>
+							<br>
+							gunzip smppsim.tar.gz
+							<br>
+							tar xvf smppsim.tar
+							<br>
+							<br>
+							4. Change to the SMPPSim home directory (SMPPSim) and run the script startsmppsim.bat (windows) or startsmppsim.sh (Unix)
+						</p>
+					</blockquote>
+					<hr>
+					<p>
+						<b>
+							<a name="installation"></a>
+							INSTALLATION
+						</b>
+					</p>
+					<p>
+						Installation is easy. Just follow the directions in the Quick Start section above! Then read the information in the Configuration section to tune SMPPSim to your needs and to utilise the various features.
+					</p>
+					<hr>
+					<p>
+						<b>
+							<a name="config"></a>
+							CONFIGURATION
+							<br>
+							<br>
+						</b>
+						SMPPSim is configured via a text properties file. In the default distribution, this file is called &quot;smppsim.props&quot;. Use a standard text editor such as vi to change it. The file itself documents each configuration property in comments. It is
+						reproduced below for convenience:
+						<br>
+						<br>
+						# SMPP_PORT specified the port that SMPPSim will listen on for connections from SMPP
+						<br>
+						# clients. SMPP_CONNECTION_HANDLERS determines the maximum number of client connections
+						<br>
+						# that can be handled concurrently.
+						<br>
+						SMPP_PORT=2775
+						<br>
+						SMPP_CONNECTION_HANDLERS=10
+					</p>
+
+					<p>
+						# Specify the classes that implement connection and protocol handling respectively here.
+						<br>
+						# Such classes *must* be subclasses of com.seleniumsoftware.SMPPSim.ConnectionHandler and com.seleniumsoftware.SMPPSim.SMPPProtocolHandler respectively
+						<br>
+						# Or those classes themselves for the default (good) behaviour
+						<br>
+						# Supply your own subclasses with particular methods overridden if you want to implement
+						<br>
+						# bad SMSC behaviours to see how your client application copes...
+						<br>
+						CONNECTION_HANDLER_CLASS=com.seleniumsoftware.SMPPSim.StandardConnectionHandler
+						<br>
+
+						PROTOCOL_HANDLER_CLASS=com.seleniumsoftware.SMPPSim.StandardProtocolHandler
+					</p>
+					<p>
+						# Specify the class that implements the message state life cycle simulation.
+						<br>
+						# Such classes must extend the default class, LifeCycleManager
+						<br>
+						LIFE_CYCLE_MANAGER=com.seleniumsoftware.SMPPSim.LifeCycleManager
+						<br>
+						#
+						<br>
+						# The Deterministic Lifecycle Manager sets message state according to the first character of the message destination address:
+						<br>
+
+						# 1=EXPIRED,2=DELETED,3=UNDELIVERABLE,4=ACCEPTED,5=REJECTED, other=DELIVERED
+						<br>
+						# LIFE_CYCLE_MANAGER=com.seleniumsoftware.SMPPSim.DeterministicLifeCycleManager
+					</p>
+					<p>
+						# LifeCycleManager parameters
+						<br>
+						#
+						<br>
+						# Check and possibly change the state of messages in the OutboundQueue every n milliseconds
+						<br>
+						MESSAGE_STATE_CHECK_FREQUENCY=5000
+					</p>
+
+					<p>
+						# Maximum time (in milliseconds) in the initial ENROUTE state
+						<br>
+						MAX_TIME_ENROUTE=10000
+					</p>
+					<p>
+						# Percentage of messages that change state each time we check (excluding expiry or messages being completely discarded due to age)
+						<br>
+						# Requires an integer between 0 and 100
+						<br>
+						PERCENTAGE_THAT_TRANSITION=75
+					</p>
+					<p>
+						# State transition percentages. These parameters define the percentage of messages that
+						<br>
+
+						# transition from ENROUTE to the specified final state. The list of percentages should
+						<br>
+						# add up to 100 and must be integer values. SMPPSim will adjust the percentages if they do not.
+					</p>
+					<p>
+						# Percentage of messages that will transition from ENROUTE to DELIVERED
+						<br>
+						PERCENTAGE_DELIVERED=90
+					</p>
+					<p>
+						# Percentage of messages that will transition from ENROUTE to UNDELIVERABLE
+						<br>
+						PERCENTAGE_UNDELIVERABLE=6
+					</p>
+
+					<p>
+						# Percentage of messages that will transition from ENROUTE to ACCEPTED
+						<br>
+						PERCENTAGE_ACCEPTED=2
+					</p>
+					<p>
+						# Percentage of messages that will transition from ENROUTE to REJECTED
+						<br>
+						PERCENTAGE_REJECTED=2
+					</p>
+					<p>
+						# Time messages held in queue before being discarded, after a final state has been reached (milliseconds)
+						<br>
+						# For example, after transitioning to DELIVERED (a final state), state info about this message will be
+						<br>
+
+						# retained in the queue for a further (e.g.) 60000 milliseconds before being deleted.
+						<br>
+						DISCARD_FROM_QUEUE_AFTER=60000
+					</p>
+					<p>
+					# OUTBIND parameters<br>
+					# OUTBIND_ENABLED controls whether outbind will take place or not<br>
+					OUTBIND_ENABLED=true
+					<br>
+					# If OUTBIND_ENABLED=true you must specify the following three properties<br>
+					OUTBIND_ESME_IP_ADDRESS=127.0.0.1
+					<br>
+					OUTBIND_ESME_PORT=2776
+					<br>
+					OUTBIND_ESME_PASSWORD=password
+					</p>
+					<p>
+						# Web Management
+						<br>
+						HTTP_PORT=88
+						<br>
+						HTTP_THREADS=1
+						<br>
+						DOCROOT=www
+						<br>
+
+						AUTHORISED_FILES=/index.htm,/inject_mo.htm,/favicon.ico,/images/logo.gif,/images/pda2.gif,/user-guide.htm
+						<br>
+						INJECT_MO_PAGE=/inject_mo.htm
+					</p>
+					<p>
+						# Account details. One account only can be specified. SystemID and Password provided in Binds will be validated against these credentials.
+						<br>
+						SYSTEM_ID=smppclient
+						<br>
+						PASSWORD=password
+					</p>
+					<p>
+						# MO SERVICE
+						<br>
+
+						DELIVERY_MESSAGES_PER_MINUTE=0
+						<br>
+						DELIVER_MESSAGES_FILE=deliver_messages.csv
+					</p>
+					<p>
+						# LOOPBACK
+						<br>
+						LOOPBACK=FALSE
+					</p>
+					<p>
+						# QUEUES
+						<br>
+						# Maximum size parameters are expressed as max number of objects the queue can hold
+						<br>
+
+						OUTBOUND_QUEUE_MAX_SIZE=1000
+						<br>
+						INBOUND_QUEUE_MAX_SIZE=1000
+						
+						<br>
+The delayed inbound queue holds DELIVER_SM (MO) messages which could not be delivered to the selected ESME
+because it replied "queue full". Such messages get stored in the delayed inbound queue and delivery is attempted again
+periodically according to the following configuration.
+						<br>
+               # How many seconds to wait between passes through the delayed inbound queue. Recommend this is set to at least one minute.
+               <br>
+               DELAYED_INBOUND_QUEUE_PROCESSING_PERIOD=60
+               <br>
+# How many times at most to retry delivery of a delayed MO message before giving up and discarding the message
+               <br>
+DELAYED_INBOUND_QUEUE_MAX_ATTEMPTS=50
+	
+					</p>
+					<p>
+						# LOGGING
+						<br>
+						# See logging.properties for configuration of the logging system as a whole
+						<br>
+						#
+						<br>
+						# Set the following property to true to have each PDU logged in human readable
+						<br>
+
+						# format. Uses INFO level logging so the log level must be set accordingly for this
+						<br>
+						# output to appear.
+						<br>
+						DECODE_PDUS_IN_LOG=true
+					</p>
+					<p>
+						# PDU CAPTURE
+						<br>
+						# The following properties allow binary and/or decoded PDUs to be captured in files
+						<br>
+						# This is to allow the results of test runs (especially regression testing) to be
+						<br>
+
+						# checked with reference to these files
+						<br>
+						#
+						<br>
+						# Note that currently you must use the StandardConnectionHandler and StandardProtocolHandler classes for this
+						<br>
+						# feature to be available.
+						<br>
+						#
+						<br>
+						# _SME_ properties concern PDUs sent from the SME application to SMPPSim
+						<br>
+
+						# _SMPPSIM_ properties concern PDUs sent from SMPPSim to the SME application
+						<br>
+						#
+						<br>
+						CAPTURE_SME_BINARY=false
+						<br>
+						CAPTURE_SME_BINARY_TO_FILE=sme_binary.capture
+						<br>
+						CAPTURE_SMPPSIM_BINARY=false
+						<br>
+						CAPTURE_SMPPSIM_BINARY_TO_FILE=smppsim_binary.capture
+						<br>
+
+						CAPTURE_SME_DECODED=false
+						<br>
+						CAPTURE_SME_DECODED_TO_FILE=sme_decoded.capture
+						<br>
+						CAPTURE_SMPPSIM_DECODED=false
+						<br>
+						CAPTURE_SMPPSIM_DECODED_TO_FILE=smppsim_decoded.capture
+						<br>
+					</p>
+					<p>
+						# Byte Stream Callback
+						<br>
+						#
+						<br>
+						# This feature, if enabled, will cause SMPPSim to send PDUs received from the ESME or sent to it
+						<br>
+						# as byte streams over a couple of connections.
+						<br>
+						# This is intended to be useful in automated testing scenarios where you need to notify the test application
+						<br>
+						# with details of what was *actually* received by SMPPSim (or sent by it).
+						<br>
+						#
+						<br>
+						# Note that byte streams are prepended by the following fields:
+						<br>
+						#
+						<br>
+						# a 4 byte integer which indicates the length of the whole callback message
+						<br>
+						# a 1 byte indicator of the type of interaction giving rise to the callback,
+						<br>
+						# - where 0x01 means SMPPSim received a request PDU and
+						<br>
+						# 0x02 means SMPPSim sent a request PDU (e.g. a DeliverSM)
+						<br>
+						# a 4 byte fixed length identified, which identifies the SMPPSim instance that sent the bytes
+						<br>
+						#
+						<br>
+						# So the length of the SMPP pdu is the callback message length - 9.
+						<br>
+						#
+						<br>
+						# LENGTH(4) TYPE(1) ID(4) PDU (LENGTH)
+						<br>
+						CALLBACK=true
+						<br>
+						CALLBACK_ID=SIM1
+						<br>
+						CALLBACK_TARGET_HOST=localhost
+						<br>
+						CALLBACK_PORT=3333
+						<br>
+
+					</p>
+					<p>
+						# MISC
+						<br>
+
+						SMSCID=SMPPSim
+					</p>
+					<hr>
+					<p>
+						<b>
+							<a name="ui"></a>
+							USER INTERFACE
+							<br>
+							<br>
+						</b>
+					</p>
+					<p>
+						SMPPSim has a web based user interface which provides detailed information on PDUs sent and received and has a form which allows you to "inject" DELIVER_SM PDUs into SMPPSim's internal queues, for subsequent delivery to a suitable SMPP client
+						application (ESME). See the section on
+						<a href="#mo">
+							Mobile Originated Messages
+						</a>
+						for further details. Access the User Interface by pointing your web browser at the server that SMPPSim is installed upon, specifying the port listed in the configuration file via the HTTP_PORT property. <br><br>
+						So if SMPPSim is runing on your local computer
+						and you have not changed the port from the default, the following address will bring up the SMPPSim user interface, assuming SMPPSim is running:
+						<a href="http://localhost:88">
+							http://localhost:88
+						</a>
+						<br><br>
+						<b>Screen shots</b>
+						<br><br>
+						<a href="images/homepage.gif">The Home Page</a><br>
+						<a href="images/inject_mo.gif">The MO Injection page</a>
+					</p>
+					<hr>
+					<p>
+						<b>
+							<a name="mo"></a>
+							MOBILE ORIGINATED MESSAGES
+							<br>
+						</b>
+					</p>
+					<p>
+						SMPPSim provides three different ways in which to generate DELIVER_SM messages which are sent from SMPPSim to your application, thus simulating the delivery of mobile originated messages. These are as follows:
+					</p>
+					<p>
+						1. The MO Injection Form
+						<br>
+						2. Loopback Service
+						<br>
+						3. MO Service
+						<br>
+						<br>
+						<b>
+							The MO Injection form
+						</b>
+						<br>
+						<br>
+						SMPPSim includes a basic web server. By default it listens for connections on port 80. Point your browser at the host that SMPPSim is running on, and the port specified in your configuration file via the HTTP_PORT property, and the SMPPSim home page
+						will appear. Click the &quot;Inject Mo Message&quot; link and the MO Injection Form will apear. Simply fill in the fields to suit your purposes and click Submit. A DELIVER_SM message will be inserted into SMPPSim's inbound queue and delivered to a
+						suitable client that has bound as a receiver or transceiver and whose address_range matches the destination address of your message.
+						<br>
+						<br>
+						<b>
+							Loopback Service
+						</b>
+					</p>
+					<p>
+						The loopback service is enabled by setting the LOOPBACK property to TRUE in the props file. When activated in this way and provided there is an active Receiver object, all messages submitted to SMPPSim (SUBMIT_SM) via a Transmitter object will be
+						converted into corresponding DELIVER_SM messages and added to the inbound queue from where it will be returned via an active Receiver object. In other word, every message your application sends gets delivered right back.
+					</p>
+					<p>
+						<b>
+							MO Service
+							<br>
+						</b>
+						<br>
+						SMPPSim includes a feature known as the MO Service. By setting the DELIVERY_MESSAGES_PER_MINUTE property to a non-zero value, SMPPSim will periodically send a DELIVER_SM message to your application. The messages themselves are defined in a file
+						whose name you specify in the configuration (by default it is deliver_messages.csv. Message records in this file are represented in comma separated format consisting of the source address, destination address and short message content. The message content can 
+						either be a plain text message or a binary message. Messages are designated as binary by prefixing them with 0x and then formulating the message in hexadecimal notation, representing each byte value with a pair of hexadecimal digits. e.g. to include message "1234" in binary format, the
+						short message field in the MO service input file should be specified as 0x31323334. For binary messages, data_coding will automatically be set to 4 by SMPPSim.<br><br>
+						Once again, as with all three of the Mobile Originated Message features of SMPPSim, your application must bind as a receiver at least once for there to be a path available to SMPPSim for the delivery of such messages.
+					</p>
+					<hr>
+					<p>
+						<b>
+							<a name="outbind"></a>
+							OUTBIND
+							<br>
+						</b>
+					</p>
+					<p>
+						SMPPSim can be configured to support the OUTBIND operation. If enabled (by setting OUTBIND_ENABLED=true) then this feature behaves as follows:
+						<br>
+						1. In the event that an MO message needs to be delivered, but there is no session available to receive the message then the message will be stored in the PENDING_QUEUE and an OUTBIND request sent to the IP address and port specified in the relevant OUTBIND_ properties.
+						<br>
+						2. OUTBIND will only be sent once in response to the PENDING_QUEUE becoming non-empty. Once the queue is empty again however, the internal flag that controls whether an OUTBIND should be sent or not is reset, and the next time the PENDING_QUEUE is non-empty, another OUTBIND will be sent.
+					<hr>
+					<p>
+						<b>
+							<a name="capture"></a>
+							PDU CAPTURE
+							<br>
+						</b>
+					</p>
+					<p>
+						SMPPSim can now be configured to capture, to separate files, any combination of:
+						<br>
+						a) PDUs received from the SME application by SMPPSim, in binary format
+						<br>
+						b) PDUs received from the SME application by SMPPSim, in decoded, character format
+						<br>
+						c) PDUs sent by SMPPSim to the SME application in binary format
+						<br>
+						d) PDUs sent by SMPPSim to the SME application in decoded, character format
+						<br>
+					<p>
+						<br>
+						This feature was provided to better support forms of testing such as regression testing. It is envisaged that capturing PDUs in binary format will be used to allow unexpected, PDU level changes, to be detected, possibly as part of an automated test
+						suite. See configuration details above.
+						<br>
+						<br>
+						Note that this feature is currently only supported when using hte (default) StandardProtocolHandler and StandardConnectionHandler classes.
+						<b>
+						</b>
+					</p>
+					<hr>
+					<p>
+						<b>
+							<a name="dr"></a>
+							DELIVERY RECEIPTS
+							<br>
+							<br>
+						</b>
+						SMPPSim supports delivery receipts. To request a delivery receipt, just set the registered_delivery_flag in your SUBMIT_SM PDU, as per the SMPP specification. Note though that SMPPSim features a &quot;message life cycle simulator&quot; and this means
+						that (as per the real world), not all messages get &quot;delivered&quot;. You can control how likely it is that your messages get delivered, using the probability settings in the smppsim.props configuration file, as described above. If your message
+						does get delivered, and this may take some seconds or minutes after you originally submitted it, then SMPPSim will queue a delivery receipt for delivery to an appropriate session. An appropriate session is one which is bound as a transmitter or
+						transceiver and which specified an address_range when binding, which matches the address the delivery receipt is addressed to.
+					</p>
+					<hr>
+					<p>
+						<b>
+							<a name="testsuite"></a>
+							TEST SUITE
+							<br>
+						</b>
+						SMPPSim includes a JUnit test suite. The tests require 3 separate instances of SMPPSim, each with a different configuration to be running. A script which allows the required servers to be launched is supplied. Run either starttestservers.bat or
+						starttestservers.sh to launch them. Then run the script runtests.bat or runtests.sh. Note that the latter scripts launch the JUnit GUI and are not suitable for use of a headless server. They may of course be amended to run JUnit in text mode. See the
+						JUnit documentation for details of how to do this.
+						<b>
+						</b>
+					</p>
+					<p>
+						<b>
+							<a name="conditions"></a>
+							CONDITIONS OF USE
+						</b>
+					</p>
+					<p>
+						SMPPSim, its documentation, source code and associated HTML forms and images are provided free of charge. You may modify the SMPPSim source code in (almost, see below) any way you see fit. If you find a bug or implement an improvement though, the
+						author, Selenium Software Ltd would be grateful if you could send details to them so that future releases can incorporate your improvement.
+					</p>
+					<p>
+						You must not, however do any of the following:
+					</p>
+					<ol>
+						<li>
+							Remove the author's name or that of Selenium Software Ltd from the source code, documentation or associated files. The author's name must remain in the source code and must be displayed by SMPPSim when it starts.
+						</li>
+						<li>
+							Use any of the graphics files apart from within the provided HTML forms.
+						</li>
+					</ol>
+					<p>
+						<b>
+							Disclaimer
+						</b>
+					</p>
+					<p>
+						Neither the Martin Woolley or Selenium Software Ltd shall not be liable for errors contained herein or for incidental or consequential damages in connection with the furnishing, performance, or use of this software or its associated
+						documentation..
+					</p>
+					<p align="center">
+						<a href="mailto:smppsim@seleniumsoftware.com">
+							smppsim@seleniumsoftware.com
+						</a>
+						<br>
+						<br>
+					</p>
+					<p align="center">
+						&nbsp;
+					</p>
+
+				</td>
+				<td class="outerbackground">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td class="dark">
+					&nbsp;
+				</td>
+				<td class="footer">
+					<table cellpadding="0" cellspacing="0" border="0" class="maxwidth">
+						<tr>
+							<td class="copyright">
+								Copyright
+								<a href="http://www.seleniumsoftware.com" target="_blank" class="createdlink">
+									Selenium Software Ltd
+								</a>
+								2006
+							</td>
+							<td class="created">
+								SMPPSim Version 2.2
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td class="dark">
+					&nbsp;
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

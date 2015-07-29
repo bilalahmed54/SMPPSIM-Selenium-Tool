@@ -1,0 +1,487 @@
+<html>
+	<head>
+		<title>
+			SMPPSim MO Injection Form
+		</title>
+		<meta name="Author" content="www.seleniumsoftware.com" />
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+	</head>
+	<body>
+		<table cellpadding="0" cellspacing="0" border="0" id="logo">
+			<tr>
+				<td>
+					&nbsp;
+				</td>
+				<td>
+					<img src="images/logo.gif" width="300" height="74" alt="Selenium Software logo" />
+				</td>
+				<td>
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td class="dark">
+					&nbsp;
+				</td>
+				<td class="menu">
+					<table cellpadding="0" cellspacing="0" border="0" id="menutable">
+						<tr>
+							<td class="menuitems">
+								<img src="images/dots.gif" width="5" height="5" alt="" />
+							</td>
+							<td class="menuspacers">
+								<a href="index.htm?refresh">
+									Home Page
+								</a>
+							</td>
+							<td class="menuitems">
+								<img src="images/dots.gif" width="5" height="5" alt="" />
+							</td>
+							<td class="menuspacers">
+								<a href="user-guide.htm" target="userguide">
+									User Guide
+								</a>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td class="dark">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td class="outerbackground">
+					&nbsp;
+				</td>
+				<td class="orangecontentouter">
+					<!-- content -->
+					<h1>
+						SMPPSim MO Injection Form
+					</h1>
+					<h2>
+						$$message$$
+					</h2>
+
+					<table cellpadding="0" cellspacing="0" border="0" class="max">
+						<tr>
+							<td class="content">
+								<form name="form1" method="get" action="inject_mo">
+									<table border="0">
+										<tr>
+											<td>
+												<b>
+													Main Attributes
+												</b>
+											</td>
+											<td>
+												<i>
+													See further down in form for other DELIVER_SM attributes
+												</i>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													short_message
+												</b>
+											</td>
+		  								<td>
+	 											<TEXTAREA name="short_message" rows="4" cols="80">$$short_message$$</TEXTAREA><br>
+	 											<i>You can paste Unicode messages directly into this field. Don't forget to set data_coding to 8 if using Unicode.</i>
+  										</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													short message in hex format?
+												</b>
+											</td>
+											<td>
+												<input type="checkbox" name="format" value="yes" $$format$$/> (<i>Use this for binary messages</i>)
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													source_addr
+												</b>
+											</td>
+											<td>
+												<input type="text" name="source_addr" value="$$source_addr$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													destination_addr
+												</b>
+											</td>
+											<td>
+												<input type="text" name="destination_addr" value="$$dest_addr$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												&nbsp;
+											</td>
+											<td>
+												<input type="submit" name="submit" value="Submit Message"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												&nbsp;
+											</td>
+											<td>
+    											&nbsp;
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													
+														Other Attributes
+												</b>
+											</td>
+											<td>
+												&nbsp;
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													service_type
+												</b>
+											</td>
+											<td>
+												<input type="text" name="service_type" value="$$service_type$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													source_addr_ton
+												</b>
+											</td>
+											<td>
+												<input type="text" name="source_addr_ton" value="$$source_addr_ton$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													source_addr_npi
+												</b>
+											</td>
+											<td>
+												<input type="text" name="source_addr_npi" value="$$source_addr_npi$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													dest_addr_ton
+												</b>
+											</td>
+											<td>
+												<input type="text" name="dest_addr_ton" value="$$dest_addr_ton$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													dest_addr_npi
+												</b>
+											</td>
+											<td>
+												<input type="text" name="dest_addr_npi" value="$$dest_addr_npi$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													esm_class
+												</b>
+											</td>
+											<td>
+												<input type="text" name="esm_class" value="$$esm_class$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													protocol_ID
+												</b>
+											</td>
+											<td>
+												<input type="text" name="protocol_ID" value="$$protocol_id$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													priority_flag
+												</b>
+											</td>
+											<td>
+												<input type="text" name="priority_flag" value="$$priority_flag$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													registered_delivery_flag
+												</b>
+											</td>
+											<td>
+												<input type="text" name="registered_delivery_flag" value="$$registered_delivery_flag$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													data_coding
+												</b>
+											</td>
+											<td>
+												<input type="text" name="data_coding" value="$$data_coding$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													user_message_reference
+												</b>
+											</td>
+											<td>
+												<input type="text" name="user_message_reference" value="$$user_message_reference$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													source_port
+												</b>
+											</td>
+											<td>
+												<input type="text" name="source_port" value="$$source_port$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													destination_port
+												</b>
+											</td>
+											<td>
+												<input type="text" name="destination_port" value="$$destination_port$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													sar_msg_ref_num
+												</b>
+											</td>
+											<td>
+												<input type="text" name="sar_msg_ref_num" value="$$sar_msg_ref_num$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													sar_total_segments
+												</b>
+											</td>
+											<td>
+												<input type="text" name="sar_total_segments" value="$$sar_total_segments$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													sar_segment_seqnum
+												</b>
+											</td>
+											<td>
+												<input type="text" name="sar_segment_seqnum" value="$$sar_segment_seqnum$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													user_response_code
+												</b>
+											</td>
+											<td>
+												<input type="text" name="user_response_code" value="$$user_response_code$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													privacy_indicator
+												</b>
+											</td>
+											<td>
+												<input type="text" name="privacy_indicator" value="$$privacy_indicator$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													payload_type
+												</b>
+											</td>
+											<td>
+												<input type="text" name="payload_type" value="$$payload_type$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													message_payload
+												</b>
+											</td>
+											<td>
+												<input type="text" name="message_payload" value="$$message_payload$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													callback_num
+												</b>
+											</td>
+											<td>
+												<input type="text" name="callback_num" value="$$callback_num$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													source_subaddress
+												</b>
+											</td>
+											<td>
+												<input type="text" name="source_subaddress" value="$$source_subaddress$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													dest_subaddress
+												</b>
+											</td>
+											<td>
+												<input type="text" name="dest_subaddress" value="$$dest_subaddress$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													language_indicator
+												</b>
+											</td>
+											<td>
+												<input type="text" name="language_indicator" value="$$language_indicator$$"/>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<hr></hr>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<b>
+													Vendor Specific Optional TLV Parameters. Enter TLV value fields in hex notation please....
+												</b>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													Optional TLV 1
+												</b>
+											</td>
+											<td>
+												Tag:<input type="text" name="tlv1_tag" value="$$tlv1_tag$$" maxlength="5" size="5"/> (decimal) 
+												Length:<input type="text" name="tlv1_len" value="$$tlv1_len$$" maxlength="3" size="3"/> (decimal)
+												Value:<input type="text" name="tlv1_val" value="$$tlv1_val$$"/> (hex)
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													Optional TLV 2
+												</b>
+											</td>
+											<td>
+												Tag:<input type="text" name="tlv2_tag" value="$$tlv2_tag$$" maxlength="5" size="5"/> (decimal) 
+												Lenhth:<input type="text" name="tlv2_len" value="$$tlv2_len$$" maxlength="3" size="3"/> (decimal)
+												Value:<input type="text" name="tlv2_val" value="$$tlv2_val$$"/> (hex)
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													Optional TLV 3
+												</b>
+											</td>
+											<td>
+												Tag:<input type="text" name="tlv3_tag" value="$$tlv3_tag$$" maxlength="5" size="5"/> (decimal) 
+												Length:<input type="text" name="tlv3_len" value="$$tlv3_len$$" maxlength="3" size="3"/> (decimal)
+												Value:<input type="text" name="tlv3_val" value="$$tlv3_val$$"/> (hex)
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>
+													Optional TLV 4
+												</b>
+											</td>
+											<td>
+												Tag:<input type="text" name="tlv4_tag" value="$$tlv4_tag$$" maxlength="5" size="5"/> (decimal) 
+												Length:<input type="text" name="tlv4_len" value="$$tlv4_len$$" maxlength="3" size="3"/> (decimal)
+												Value:<input type="text" name="tlv4_val" value="$$tlv4_val$$"/> (hex)
+											</td>
+										</tr>
+									</table>
+								</form>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td class="outerbackground">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td class="dark">
+					&nbsp;
+				</td>
+				<td class="footer">
+					<table cellpadding="0" cellspacing="0" border="0" class="maxwidth">
+						<tr>
+							<td class="copyright">
+								Copyright
+								<a href="http://www.seleniumsoftware.com" target="_blank" class="createdlink">
+									Selenium Software Ltd
+								</a>
+								2006
+							</td>
+							<td class="created">
+								SMPPSim Version 2.4
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td class="dark">
+					&nbsp;
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,359 @@
+<html>
+	<head>
+		<title>
+			SMPPSim Control Panel
+		</title>
+		<meta name="Author" content="www.seleniumsoftware.com" />
+		<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+	</head>
+	<body>
+		<table cellpadding="0" cellspacing="0" border="0" id="logo">
+			<tr>
+				<td>
+					&nbsp;
+				</td>
+				<td>
+					<img src="images/logo.gif" width="300" height="74" alt="Selenium Software logo" />
+				</td>
+				<td>
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td class="dark">
+					&nbsp;
+				</td>
+				<td class="menu">
+					<table cellpadding="0" cellspacing="0" border="0" id="menutable">
+						<tr>
+							<td class="menuitems">
+								<img src="images/dots.gif" width="5" height="5" alt="" />
+							</td>
+							<td class="menuspacers">
+								<a href="?refresh">
+									Refresh
+								</a>
+							</td>
+							<td class="menuitems">
+								<img src="images/dots.gif" width="5" height="5" alt="" />
+							</td>
+							<td class="menuspacers">
+								<a href="inject_mo.htm">
+									Inject an MO Message
+								</a>
+							</td>
+							<td class="menuitems">
+								<img src="images/dots.gif" width="5" height="5" alt="" />
+							</td>
+							<td class="menuspacers">
+								<a href="user-guide.htm" target="userguide">
+									User Guide
+								</a>
+							</td>
+							<td class="menuitemsright">
+								<img src="images/dots.gif" width="5" height="5" alt="" />
+							</td>
+							<td class="menuspacers">
+								<a href="?shutdown">
+									Shutdown SMPPSim
+								</a>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td class="dark">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td class="outerbackground">
+					&nbsp;
+				</td>
+				<td class="orangecontentouter">
+					<!-- content -->
+
+					<h1>
+						SMPPSim Control Panel
+					</h1>
+					<h2>
+						$$message$$
+					</h2>
+
+					<table cellpadding="0" cellspacing="0" border="0" class="max">
+						<tr>
+							<td class="content">
+								<table border="0">
+									<tr>
+										<td colspan="2">
+											SMPPSim has been running since:
+										</td>
+										<td>
+											$$starttime$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											TX sessions bound
+										</td>
+										<td>
+											$$txbound$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											RX sessions bound
+										</td>
+										<td>
+											$$rxbound$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											TRX sessions bound
+										</td>
+										<td>
+											$$trxbound$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											InboundQueue Size (MO messages)
+										</td>
+										<td>
+											$$iqcount$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											PendingQueue Size (MO messages, no session available)
+										</td>
+										<td>
+											$$pqcount$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											OutboundQueue Size (MT messages)
+										</td>
+										<td>
+											$$oqcount$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											<h3>
+												PDU Statistics
+											</h3>
+										</td>
+										<td>
+											&nbsp;
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											<b>
+												PDU Type
+											</b>
+										</td>
+										<td>
+											<b>
+												ESME_ROK count
+											</b>
+										</td>
+										<td>
+											<b>
+												Error Count
+											</b>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											BIND_TRANSMITTER
+										</td>
+										<td>
+											$$bindtransmitter_ok$$
+										</td>
+										<td>
+											$$bindtransmitter_err$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											BIND_RECEIVER
+										</td>
+										<td>
+											$$bindreceiver_ok$$
+										</td>
+										<td>
+											$$bindreceiver_err$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											BIND_TRANSCEIVER
+										</td>
+										<td>
+											$$bindtransceiver_ok$$
+										</td>
+										<td>
+											$$bindtransceiver_err$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											OUTBIND
+										</td>
+										<td>
+											$$outbind_ok$$
+										</td>
+										<td>
+											$$outbind_err$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											SUBMIT_SM
+										</td>
+										<td>
+											$$submit_sm_ok$$
+										</td>
+										<td>
+											$$submit_sm_err$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											SUBMIT_MULTI
+										</td>
+										<td>
+											$$submit_multi_ok$$
+										</td>
+										<td>
+											$$submit_multi_err$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											DELIVER_SM
+										</td>
+										<td>
+											$$deliver_sm_ok$$
+										</td>
+										<td>
+											$$deliver_sm_err$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											DATA_SM
+										</td>
+										<td>
+											$$data_sm_ok$$
+										</td>
+										<td>
+											$$data_sm_err$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											QUERY_SM
+										</td>
+										<td>
+											$$query_sm_ok$$
+										</td>
+										<td>
+											$$query_sm_err$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											CANCEL_SM
+										</td>
+										<td>
+											$$cancel_sm_ok$$
+										</td>
+										<td>
+											$$cancel_sm_err$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											REPLACE_SM
+										</td>
+										<td>
+											$$replace_sm_ok$$
+										</td>
+										<td>
+											$$replace_sm_err$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											ENQUIRE_LINK
+										</td>
+										<td>
+											$$enquire_link_ok$$
+										</td>
+										<td>
+											$$enquire_link_err$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											UNBIND
+										</td>
+										<td>
+											$$unbind_ok$$
+										</td>
+										<td>
+											$$unbind_err$$
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											GENERIC_NAK
+										</td>
+										<td>
+											$$generic_nak_ok$$
+										</td>
+										<td>
+											$$generic_nak_err$$
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td class="outerbackground">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td class="dark">
+					&nbsp;
+				</td>
+				<td class="footer">
+					<table cellpadding="0" cellspacing="0" border="0" class="maxwidth">
+						<tr>
+							<td class="copyright">
+								Copyright
+								<a href="http://www.seleniumsoftware.com" target="_blank" class="createdlink">
+									Selenium Software Ltd
+								</a>
+								2006
+							</td>
+							<td class="created">
+								SMPPSim Version 2.4
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td class="dark">
+					&nbsp;
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>
