@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  smppsim:
+    build: .
+    image: smppsim:latest
+    ports:
+      - 127.0.0.1:88:88
+      - 127.0.0.1:2776:2776
+      - 127.0.0.1:3333:3333
